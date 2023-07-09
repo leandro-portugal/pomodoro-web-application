@@ -7,12 +7,25 @@
     <title>Pomodoro Web Application</title>
 </head>
 <body>
-    <svg width="250" height="250" class="circle-container">
+    <div class="main">
+        <div class="turns">1/4</div>
+            <div class="timer-container">
+                <svg width="250" height="250" class="circle-container">
+                    <circle class="background-circle"/>
+                    <circle class="circle"/>
+                </svg>
+            <div class="time">23:33</div>
+        </div>
+            <div class="time-mode">Trabalho</div>
+            <div>
+                <button class="timer-control">Iniciar</button>
+                <button class="reset-timer">Reiniciar</button>
+            </div>
+    </div>
         
-        <circle class="background-circle"/>
-        <circle class="circle"/>
-
-    </svg>
+    <audio id="notification">
+        <source src="assets/sounds/notifications.mp3">
+    </audio>
     <script src="assets/js/scripts.js"></script>
 </body>
 </html>
