@@ -1,0 +1,25 @@
+:root{
+    --timer-color: rgb(0, 0, 255)
+}
+.circle-container{
+    transform: rotate(-90deg);
+}
+.background-circle, .circle{
+
+    r:100;
+    cx: 125;
+    cy: 125;
+    fill: none;
+}
+.background-circle{
+    stroke: rgba(255, 255, 255, .2);
+    stroke-width: 8;
+}
+.circle{
+
+    stroke: var(--timer-color);
+    stroke-width: 16;
+    stroke-dasharray: 636;
+    stroke-dashoffset: var(--dash-offeset, 0);
+    transition: stroke-dashoffset 1s linear;
+}
