@@ -41,6 +41,10 @@ button:hover{
     border-radius: 0.313rem;
 }
 
+.circle-container{
+    transform: rotate(-90deg);
+}
+
 .timer-container{
     position: relative;
 }
@@ -82,4 +86,5 @@ button:hover{
     stroke-dasharray: 636;
     stroke-dashoffset: var(--dash-offeset, 0);
     transition: stroke-dashoffset 1s linear;
+
 }

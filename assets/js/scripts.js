@@ -1,10 +1,11 @@
 const circleElement = document.querySelector('.circle');
 const timeElement = document.querySelector('.time');
 const timeModeElement = document.querySelector('.time-mode');
-const turnsElement = document.querySelector('.turns');
+const turnElement = document.querySelector('.turns');
 const controlButton = document.querySelector('.timer-control');
-const resetButton = document.querySelector('.reset-timer')
+const resetButton = document.querySelector('.reset-timer');
 const notificationSound = document.querySelector('#notification');
+
 
 let isRunning,
     isBreakTime,
@@ -18,19 +19,18 @@ let isRunning,
     timer;
 
 controlButton.addEventListener('click', toggleStartPause);
-resetButton.addEventListener ('click', reset);
+resetButton.addEventListener('click', reset);
 
 function startValues(){
-
-    isRunning = false,
-    isBreakTime = false,
-    workTime = 1500,
-    breakTime = 300,
-    longBreakTime = 900,
-    totalTurns = 4,
-    currentTurn = 1,
-    totalTime = workTime,
-    timeRemaining = totalTime,
+    isRunning = false;
+    isBreakTime = false;
+    workTime = 1 * 60;
+    breakTime = 5 * 60;
+    longBreakTime = 15 * 60;
+    totalTurns = 4;
+    currentTurn = 1;
+    totalTime = workTime;
+    timeRemaining = totalTime;
     timer = null;
 }
 
@@ -40,14 +40,13 @@ function toggleStartPause(){
 
 function start(){
     isRunning = true;
-    controlButton.innerText='Pausar';
-    timer.setInterval(updateTimer, 1000);
-
+    controlButton.innerText = 'Pausar';
+    timer = setInterval(updateTimer, 1000);
 }
 
 function pause(){
     isRunning = false;
-    controlButton.innerText='Iniciar';
+    controlButton.innerText = 'Iniciar';
     clearInterval(timer);
 }
 
@@ -64,30 +63,58 @@ function updateTimer(){
     }else{
         finishTurn();
     }
+    drawTime();
+}
+
+function finishTurn(){
+    pause();
+    notificationSound.play();
+    nextTurn();
+    drawTurn();
+}
+
+function nextTurn(){
+    isBreakTime = !isBreakTime;
+    if(!isBreakTime){
+        currentTurn++;
+    }
+    if(currentTurn <= totalTurns){
+        if(isBreakTime){
+            if(currentTurn < totalTime){
+                totalTime = breakTime;
+            }else{
+                totalTime = longBreakTime;
+            }
+        }else{
+            totalTime = workTime;
+        }
+        timeRemaining = totalTime;
+    }else{
+        reset();
+    }
 }
 
 function drawTime(){
-    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2,'0');
-    const seconds = Math.floor(timeRemaining % 60).toString().padStart(2,'0');
+    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, '0');
+    const seconds = Math.floor(timeRemaining % 60).toString().padStart(2, '0');
+
     timeElement.innerText = `${minutes}:${seconds}`;
-    setCirclePercent(timeRemaining / totalTime * 100);
+    setCirclePercent(timeRemaining/totalTime*100);
 }
 
 function drawTurn(){
     let timeMode = 'Trabalho';
-
     if(isBreakTime){
         timeMode = currentTurn < totalTurns ? 'Descanso' : 'Descanso Longo';
     }
-
     timeModeElement.innerText = timeMode;
-    turnsElement.innerText = `${currentTurn} / ${totalTurns}`;
+    turnElement.innerText = `${currentTurn} / ${totalTurns}`;
 }
 
 function setCirclePercent(percent){
-
-    const circlePerimeter = 636;
+    const circlePerimeter = 597;
     const dashOffset = (circlePerimeter * (percent / 100));
-    circleElement.style.setProperty('--dash-offset', dashOffset, circlePerimeter - dashOffset);
-
+    circleElement.style.setProperty('--dash-offset', circlePerimeter - dashOffset)
 }
+
+reset();
