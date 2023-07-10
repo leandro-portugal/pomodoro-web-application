@@ -55,6 +55,17 @@ function drawTime(){
     setCirclePercent(timeRemaining / totalTime * 100);
 }
 
+function drawTurn(){
+    let timeMode = 'Trabalho';
+
+    if(isBreakTime){
+        timeMode = currentTurn < totalTurns ? 'Descanso' : 'Descanso Longo';
+    }
+
+    timeModeElement.innerText = timeMode;
+    turnsElement.innerText = `${currentTurn} / ${totalTurns}`;
+}
+
 function setCirclePercent(percent){
 
     const circlePerimeter = 636;
