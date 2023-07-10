@@ -17,6 +17,9 @@ let isRunning,
     timeRemaining,
     timer;
 
+controlButton.addEventListener('click', toggleStartPause);
+resetButton.addEventListener ('click', reset);
+
 function startValues(){
 
     isRunning = false,
@@ -46,6 +49,21 @@ function pause(){
     isRunning = false;
     controlButton.innerText='Iniciar';
     clearInterval(timer);
+}
+
+function reset(){
+    pause();
+    startValues();
+    drawTime();
+    drawTurn();
+}
+
+function updateTimer(){
+    if(timeRemaining > 0){
+        timeRemaining--;
+    }else{
+        finishTurn();
+    }
 }
 
 function drawTime(){
