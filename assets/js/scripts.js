@@ -31,6 +31,10 @@ function startValues(){
     timer = null;
 }
 
+function toggleStartPause(){
+    isRunning ? pause() : start();
+}
+
 function start(){
     isRunning = true;
     controlButton.innerText='Pausar';
@@ -38,14 +42,17 @@ function start(){
 
 }
 
-function toggleStartPause(){
-    isRunning ? pause() : start();
-}
-
 function pause(){
     isRunning = false;
     controlButton.innerText='Iniciar';
     clearInterval(timer);
+}
+
+function drawTime(){
+    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2,'0');
+    const seconds = Math.floor(timeRemaining % 60).toString().padStart(2,'0');
+    timeElement.innerText = `${minutes}:${seconds}`;
+    setCirclePercent(timeRemaining / totalTime * 100);
 }
 
 function setCirclePercent(percent){
