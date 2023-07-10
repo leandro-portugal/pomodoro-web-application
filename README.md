@@ -23,13 +23,15 @@ The application has the following features:
 5. Click the "Reset" button to reset the timer.
 6. Observe the remaining time being displayed in the "time" element and the current mode being displayed in the "time-mode" element.
 
+The application can be accessed at https://pomodoro-web-application.netlify.app/
+
 ## Customization
 
 You can customize the duration of the work time, break time, long break time, total number of turns, and visual styles by adjusting the values of the variables in the JavaScript code and the style rules in the CSS code.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/pomodoro-web-app.git`
+1. Clone the repository: `git clone https://github.com/leandro-portugal/pomodoro-web-app.git`
 2. Open the project folder: `cd pomodoro-web-app`
 3. Open the HTML file in your web browser.
    
