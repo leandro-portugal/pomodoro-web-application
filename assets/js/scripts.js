@@ -15,20 +15,37 @@ let isRunning,
     currentTurn,
     totalTime,
     timeRemaining,
-    time;
+    timer;
 
 function startValues(){
-    
-    isRunning,
-    isBreakTime,
+
+    isRunning = false,
+    isBreakTime = false,
     workTime = 1500,
     breakTime = 300,
     longBreakTime = 900,
-    totalTurns,
-    currentTurn,
-    totalTime,
-    timeRemaining,
-    time;
+    totalTurns = 4,
+    currentTurn = 1,
+    totalTime = workTime,
+    timeRemaining = totalTime,
+    timer = null;
+}
+
+function start(){
+    isRunning = true;
+    controlButton.innerText='Pausar';
+    timer.setInterval(updateTimer, 1000);
+
+}
+
+function toggleStartPause(){
+    isRunning ? pause() : start();
+}
+
+function pause(){
+    isRunning = false;
+    controlButton.innerText='Iniciar';
+    clearInterval(timer);
 }
 
 function setCirclePercent(percent){
