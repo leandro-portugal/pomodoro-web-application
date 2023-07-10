@@ -1,4 +1,5 @@
 const circleElement = document.querySelector('.circle');
+const backgroundCircleElement = document.querySelector('.background-circle');
 const timeElement = document.querySelector('.time');
 const timeModeElement = document.querySelector('.time-mode');
 const turnElement = document.querySelector('.turns');
@@ -24,7 +25,7 @@ resetButton.addEventListener('click', reset);
 function startValues(){
     isRunning = false;
     isBreakTime = false;
-    workTime = 1 * 60;
+    workTime = 25 * 60;
     breakTime = 5 * 60;
     longBreakTime = 15 * 60;
     totalTurns = 4;
@@ -111,10 +112,11 @@ function drawTurn(){
     turnElement.innerText = `${currentTurn} / ${totalTurns}`;
 }
 
-function setCirclePercent(percent){
-    const circlePerimeter = 597;
-    const dashOffset = (circlePerimeter * (percent / 100));
-    circleElement.style.setProperty('--dash-offset', circlePerimeter - dashOffset)
-}
+function setCirclePercent(percent) {
+    const circlePerimeter = 636;
+    const dashOffset = circlePerimeter - (circlePerimeter * (percent / 100));
+    circleElement.style.setProperty('--dash-offset', dashOffset);
+  }
+  
 
 reset();
